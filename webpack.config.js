@@ -14,14 +14,21 @@ module.exports = {
       template: path.join(__dirname, "public", "index.html"),
     }),
     sentryWebpackPlugin({
-        org: "shana-et",
-        project: "test-tutorial",
+      org: "shana-et",
+      project: "test-tutorial",
 
-        // Auth tokens can be obtained by creating an internal integration
-        // at https://<organiaztion_id>.sentry.io/settings/developer-settings/
-        // and need "Release: Admin" and "Organization: Read & Write" permissions
-        authToken: process.env.SENTRY_AUTH_TOKEN,
-      }),
+      // Auth tokens can be obtained by creating an internal integration
+      // at https://<organiaztion_id>.sentry.io/settings/developer-settings/
+      // and need "Release: Admin" and "Organization: Read & Write" permissions
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+
+      release: {
+        create: true,
+        setCommits: {
+          auto: true,
+        },
+      },
+    }),
   ],
   devServer: {
     static: {
